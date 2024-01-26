@@ -10,13 +10,19 @@ for (var i = 0; i < pins; i++)
     controller.OpenPin(i, PinMode.Output);
 }
 
+int total = 0;
 bool value = false;
 while (true)
 {
     for (var i = 0; i < pins; i ++)
     {
         controller.Write(i, value);
-    }
-    Thread.Sleep(5000);
+    }    
     value = !value;
+    total++;
+
+    if (total % 1000000 == 0)
+    {
+        Console.Write("Updates written: {0:X}", total);
+    }
 }
