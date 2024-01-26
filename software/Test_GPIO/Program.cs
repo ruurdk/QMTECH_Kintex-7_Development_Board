@@ -23,6 +23,6 @@ while (true)
 
     if (total % 1000000 == 0)
     {
-        Console.Write("Updates written: {0:X}", total);
+        Console.WriteLine("Updates written: {0}", total);
     }
 }
