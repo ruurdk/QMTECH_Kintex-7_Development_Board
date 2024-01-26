@@ -21,7 +21,7 @@ while (true)
     value = !value;
     total++;
 
-    if (total % 1000000 == 0)
+    if ((total % 10000) == 0)
     {
         Console.WriteLine("Updates written: {0}", total);
     }
