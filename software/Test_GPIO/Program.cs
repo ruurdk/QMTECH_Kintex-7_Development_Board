@@ -1,17 +1,22 @@
-﻿using System;
-using System.Device.Gpio;
-using System.Threading;
+﻿using System.Device.Gpio;
 
 Console.WriteLine("Testing GPIO. Press Ctrl+C to end.");
 
-int pin = 18;
+var pins = 16;
 using var controller = new GpioController();
-controller.OpenPin(pin, PinMode.Output);
 
-bool ledOn = true;
+for (var i = 0; i < pins; i++)
+{
+    controller.OpenPin(i, PinMode.Output);
+}
+
+bool value = false;
 while (true)
 {
-    controller.Write(pin, ((ledOn) ? PinValue.High : PinValue.Low));
-    Thread.Sleep(1000);
-    ledOn = !ledOn;
+    for (var i = 0; i < pins; i ++)
+    {
+        controller.Write(i, value);
+    }
+    Thread.Sleep(5000);
+    value = !value;
 }
