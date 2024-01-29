@@ -1,28 +1,26 @@
-﻿using System.Device.Gpio;
+﻿Console.WriteLine("Testing GPIO. Press Ctrl+C to end.");
 
-Console.WriteLine("Testing GPIO. Press Ctrl+C to end.");
+var controller = new GPIO();
 
 var pins = 16;
-using var controller = new GpioController();
 
-for (var i = 0; i < pins; i++)
+for (uint i = 0; i < pins; i++)
 {
-    controller.OpenPin(i, PinMode.Output);
+    controller.PinFunction(i, GPIOFunction.Output);
 }
 
 int total = 0;
-bool value = false;
+ushort increment = 0;
 while (true)
 {
-    for (var i = 0; i < pins; i ++)
-    {
-        controller.Write(i, value);
-    }    
-    value = !value;
+    controller.WriteWord(increment);
+        
     total++;
+    increment++;
 
-    if ((total % 10000) == 0)
+    if (increment == 10000)
     {
         Console.WriteLine("Updates written: {0}", total);
+        increment = 0;
     }
 }
