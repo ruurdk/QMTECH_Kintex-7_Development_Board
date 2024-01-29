@@ -2,7 +2,9 @@ public unsafe class GPIO
 {
     // https://datasheets.raspberrypi.com/bcm2711/bcm2711-peripherals.pdf
 
-    readonly UIntPtr GPIObase = 0x7e200000;
+
+    // GPIO base is at 0x7e200000 VPU, which is at 0xfe200000 (CM4, check /proc/iomem)
+    readonly UIntPtr GPIObase = 0xfe200000;
 
     // Registers
     volatile UInt32* GPFSEL0;
